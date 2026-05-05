@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>에이치엔컨설팅</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #1a1a1a;
+    --gray-dark: #3a3a3a;
+    --gray-mid: #6b6b6b;
+    --gray-light: #f4f3f0;
+    --gray-border: #e2e0db;
+    --accent: #2a5fad;
+    --accent-light: #eaf0fb;
+    --accent-dark: #1a3f7a;
+    --white: #ffffff;
+    --serif: 'Noto Serif KR', serif;
+    --sans: 'Noto Sans KR', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    padding: 6px 16px;
+    border-radius: 40px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--gray-mid);
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--gray-mid);
+    max-width: 560px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* DIVIDER */
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--gray-border);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* PAIN POINTS */
+  .pain { background: var(--gray-light); }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .pain-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .pain-card .num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gray-border);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .pain-card p {
+    font-size: 15px;
+    color: var(--gray-dark);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  .pain-conclusion {
+    margin-top: 2.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--accent);
+    border-radius: 12px;
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .pain-conclusion strong {
+    font-weight: 500;
+  }
+
+  /* APPROACH */
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .approach-card {
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .approach-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(42,95,173,0.08);
+  }
+
+  .approach-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .approach-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .approach-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+
+  .approach-card p {
+    font-size: 14px;
+    color: var(--gray-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* SERVICES */
+  .services { background: var(--gray-light); }
+
+  .service-list {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid var(--gray-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--gray-border);
+  }
+
+  .service-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--white);
+    transition: background 0.15s;
+  }
+
+  .service-item:hover { background: var(--accent-light); }
+
+  .service-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--gray-border);
+    font-weight: 600;
+    min-width: 2rem;
+    padding-top: 2px;
+  }
+
+  .service-content h3 {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.4rem;
+  }
+
+  .service-content p {
+    font-size: 14px;
+    color: var(--gray-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* FIT */
+  .fit-list {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .fit-item {
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .fit-item p {
+    font-size: 15px;
+    color: var(--gray-dark);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* ABOUT */
+  .about { background: var(--black); color: var(--white); }
+
+  .about .section-label { color: #6b9fdd; }
+  .about .section-title { color: var(--white); }
+  .about .section-desc { color: #aaa; }
+
+  .about-card {
+    margin-top: 3rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+
+  .about-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--white);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .about-info h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--white);
+  }
+
+  .about-info .role {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    background: var(--accent-light);
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+  }
+
+  .cta-section .section-desc {
+    margin: 1rem auto 2.5rem;
+    max-width: 480px;
+  }
+
+  .btn-email {
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1.5px solid var(--accent);
+    padding-bottom: 2px;
+    margin-top: 1rem;
+    transition: opacity 0.2s;
+  }
+  .btn-email:hover { opacity: 0.65; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: #555;
+    text-align: center;
+    font-size: 13px;
+    padding: 2rem;
+    font-weight: 300;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    section { padding: 70px 1.25rem; }
+    .about-card { flex-direction: column; gap: 1.5rem; }
+    .service-item { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">에이치엔컨설팅</span>
+  <a href="mailto:transf01@gmail.com" class="nav-cta">문의하기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="hero-eyebrow">HN Consulting</p>
+    <h1>조직의 문제는 사람이 아니라,<br><em>대화</em>에 있습니다.</h1>
+    <p class="hero-sub">에이치엔컨설팅은 동기면담(MI)과 심리기반 접근으로<br>조직 내 대화의 방식을 근본적으로 바꿉니다.</p>
+    <a href="mailto:transf01@gmail.com" class="btn-primary">문의하기 →</a>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="container">
+    <p class="section-label">Problem</p>
+    <h2 class="section-title">이런 상황, 익숙하지 않으신가요?</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="num">01</span>
+        <p>리더는 말했는데,<br>팀은 움직이지 않는다</p>
+      </div>
+      <div class="pain-card">
+        <span class="num">02</span>
+        <p>갈등은 반복되고,<br>원인은 늘 불분명하다</p>
+      </div>
+      <div class="pain-card">
+        <span class="num">03</span>
+        <p>협업은 많은데,<br>성과는 제자리다</p>
+      </div>
+      <div class="pain-card">
+        <span class="num">04</span>
+        <p>이직률은 높고,<br>몰입은 낮다</p>
+      </div>
+    </div>
+    <div class="pain-conclusion">
+      이것은 의지나 역량의 문제가 아닙니다.<br>
+      <strong>대화의 설계</strong> 문제입니다.
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- APPROACH -->
+<section>
+  <div class="container">
+    <p class="section-label">Approach</p>
+    <h2 class="section-title">변화가 일어나는 대화를 설계합니다</h2>
+    <p class="section-desc">우리는 사람을 바꾸려 하지 않습니다. 대신 변화가 자연스럽게 일어나는 대화 환경을 만듭니다.</p>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="approach-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>동기면담 (MI)</h3>
+        <p>저항 없이 변화를 이끄는 대화 기술. MINT 인증 기반의 체계적 접근.</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>DBT 기반 기술</h3>
+        <p>감정과 관계를 다루는 실전 커뮤니케이션. 어려운 대화에서도 연결을 유지합니다.</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>관계 중심 접근</h3>
+        <p>구조보다 사람 사이의 연결에 집중합니다. 신뢰가 성과의 출발점입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="container">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">무엇을 도와드릴 수 있나요</h2>
+    <div class="service-list">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <div class="service-content">
+          <h3>조직 워크숍</h3>
+          <p>팀 커뮤니케이션과 협업 방식을 실질적으로 개선합니다. 이론이 아닌 실제 대화 장면에서 배웁니다.</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <div class="service-content">
+          <h3>리더 코칭</h3>
+          <p>임원·팀장 대상, 실제 상황 기반 1:1 코칭. 리더의 언어가 조직의 문화를 만듭니다.</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <div class="service-content">
+          <h3>조직 자문</h3>
+          <p>관계 구조를 분석하고 문제의 근본 원인을 탐색합니다. 증상이 아닌 원인에 집중합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- FIT -->
+<section>
+  <div class="container">
+    <p class="section-label">Who We Work With</p>
+    <h2 class="section-title">이런 조직과 함께합니다</h2>
+    <div class="fit-list">
+      <div class="fit-item"><p>갈등이 반복되는 조직</p></div>
+      <div class="fit-item"><p>리더십 전환이 필요한 조직</p></div>
+      <div class="fit-item"><p>협업은 많지만 성과가 낮은 조직</p></div>
+      <div class="fit-item"><p>변화는 원하지만 방법을 모르는 조직</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="container">
+    <p class="section-label">About</p>
+    <h2 class="section-title">대표 소개</h2>
+    <div class="about-card">
+      <div class="about-avatar">변</div>
+      <div class="about-info">
+        <h3>변신철</h3>
+        <p class="role">조직문화 컨설턴트 / 코치</p>
+        <div class="about-tags">
+          <span class="tag">MINT 인증 트레이너</span>
+          <span class="tag">동기면담 (MI)</span>
+          <span class="tag">조직·리더십 코칭</span>
+          <span class="tag">기업·의료·공공기관</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="section-title">대화가 바뀌면, 조직이 바뀝니다.</h2>
+    <p class="section-desc">지금 어떤 문제를 겪고 계신지 편하게 말씀해 주세요.</p>
+    <a href="mailto:transf01@gmail.com" class="btn-primary">문의하기 →</a><br>
+    <a href="mailto:transf01@gmail.com" class="btn-email">transf01@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 에이치엔컨설팅. All rights reserved.
+</footer>
+
+</body>
+</html>
